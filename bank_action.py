@@ -1,0 +1,122 @@
+
+import csv
+from datetime import date
+
+csv_file_name = 'account_overview.csv'
+
+with open(csv_file_name, newline='') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        print(', '.join(row))
+
+
+def add_income(amount, message):
+    with open(csv_file_name, 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([date.today(), amount, '', message])
+
+
+def add_expense(amount, message):
+    with open(csv_file_name, 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([date.today(), '', amount, message])
+
+
+def get_sum_income():
+    sum = 0
+    #print('Getting sum of income...')
+    with open(csv_file_name, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        next(reader)
+        for row in reader:
+            #print(f'Debug: Row: {row}')
+            if row[1] != '':
+                sum += int(row[1])
+    return sum
+
+
+def get_sum_expense():
+    sum = 0
+    #print('Getting sum of expense...')
+    with open(csv_file_name, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        next(reader)
+        for row in reader:
+            #print(f'Debug: Row: {row[2]}')
+            if row[2] != '':
+                sum += int(row[2])
+    return sum
+
+
+def print_history():
+    sum = 0
+    with open(csv_file_name, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        next(reader)
+        print()
+        for row in reader:
+            if row[1] != '':
+                sum += int(row[1])
+                print(f'Income:\t{row[0]}\t{row[1]} kr.\t{row[3]}\tTotal: {sum}'.expandtabs(6))
+            elif row[2] != '':
+                sum -= int(row[2])
+                print(f'Expense:\t{row[0]}\t{row[2]} kr.\t{row[3]}\tTotal: {sum}'.expandtabs(6))
+
+
+def print_rows():
+    with open(csv_file_name, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            print(row)
+
+
+def delete_content():
+    with open(csv_file_name, 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Entered:','Income','Expense','Message'])
+
+
+def main():
+    while True:
+        input_start = input('\nWhat todo? (i/e/sum/print/d)\n>').lower()
+        if input_start == 'i':
+            while True:
+                input_income = input('Enter amount of income:\n>')
+                if not input_income.isdigit():
+                    print('Try again\n')
+                else:
+                    break
+            message_input = input('Enter income message:\n>')
+            add_income(input_income, message_input)
+        elif input_start == 'e':
+            while True:
+                input_expense = input('Enter amount of expense:\n>')
+                if not input_expense.isdigit():
+                    print('Try again\n')
+                else:
+                    break
+            message_input = input('Enter income message\n>')
+            add_expense(input_expense, message_input)
+        elif input_start == 'sum':
+            sum = get_sum_income() - get_sum_expense()
+            print(f'{sum}')
+        elif input_start == 'print':
+            print_history()
+        elif input_start == 'rows':
+            print_rows()
+        elif input_start == 'd':
+            delete_content()
+        elif input_start == '':
+            break
+        else:
+            print('Try again')
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\nClosed by user')
