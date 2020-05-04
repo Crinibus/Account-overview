@@ -4,6 +4,8 @@ from datetime import date
 
 csv_file_name = 'account_overview.csv'
 
+currency = 'kr.'
+
 
 def add_income(amount, message):
     with open(csv_file_name, 'a', newline='') as csvfile:
@@ -53,11 +55,11 @@ def print_history():
             if row[1] != '':
                 sum += int(row[1])
                 message = change_message(row[3])
-                print(f'Income:\t{row[0]}\t{row[1]} kr.\t{message}\tTotal: {sum}'.expandtabs(6))
+                print(f'Income:\t{row[0]}\t{row[1]} {currency}\t{message}\tTotal: {sum}'.expandtabs(6))
             elif row[2] != '':
                 sum -= int(row[2])
                 message = change_message(row[3])
-                print(f'Expense:\t{row[0]}\t{row[2]} kr.\t{message}\tTotal: {sum}'.expandtabs(6))
+                print(f'Expense:\t{row[0]}\t{row[2]} {currency}\t{message}\tTotal: {sum}'.expandtabs(6))
 
 
 def change_message(message):
