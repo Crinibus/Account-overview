@@ -1,6 +1,7 @@
 
 import csv
 from datetime import date
+import os
 
 csv_file_name = 'account_overview.csv'
 
@@ -83,6 +84,12 @@ def print_rows():
             print(row)
 
 
+def create_csv_file():
+    with open(csv_file_name, 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Entered:','Income','Expense','Message'])
+
+
 def delete_content():
     input_delete = input('Are you sure to delete all content? (y/n)\n>')
     if input_delete == 'n':
@@ -130,6 +137,8 @@ def main():
 
 if __name__ == '__main__':
     try:
+        if not os.path.exists(f'./{csv_file_name}'):
+            create_csv_file()
         main()
     except KeyboardInterrupt:
         print('\nClosed by user')
