@@ -82,6 +82,9 @@ def print_rows():
 
 
 def delete_content():
+    input_delete = input('Are you sure to delete all content? (y/n)\n>')
+    if input_delete == 'n':
+        return
     with open(csv_file_name, 'w') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Entered:','Income','Expense','Message'])
