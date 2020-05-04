@@ -5,7 +5,7 @@ import os
 
 csv_file_name = 'account_overview.csv'
 
-currency = 'kr.'
+currency = 'USD'
 
 
 def add_income(amount, message):
