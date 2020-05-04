@@ -4,11 +4,6 @@ from datetime import date
 
 csv_file_name = 'account_overview.csv'
 
-with open(csv_file_name, newline='') as csvfile:
-    reader = csv.reader(csvfile)
-    for row in reader:
-        print(', '.join(row))
-
 
 def add_income(amount, message):
     with open(csv_file_name, 'a', newline='') as csvfile:
