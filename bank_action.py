@@ -57,10 +57,26 @@ def print_history():
         for row in reader:
             if row[1] != '':
                 sum += int(row[1])
-                print(f'Income:\t{row[0]}\t{row[1]} kr.\t{row[3]}\tTotal: {sum}'.expandtabs(6))
+                message = change_message(row[3])
+                print(f'Income:\t{row[0]}\t{row[1]} kr.\t{message}\tTotal: {sum}'.expandtabs(6))
             elif row[2] != '':
                 sum -= int(row[2])
-                print(f'Expense:\t{row[0]}\t{row[2]} kr.\t{row[3]}\tTotal: {sum}'.expandtabs(6))
+                message = change_message(row[3])
+                print(f'Expense:\t{row[0]}\t{row[2]} kr.\t{message}\tTotal: {sum}'.expandtabs(6))
+
+
+def change_message(message):
+    if len(message) < 7:
+        new_message = message
+        for i in range(10-len(message)):
+            new_message += ' '
+    elif len(message) > 7:
+        new_message = ''
+        for i in range(7):
+            new_message += message[i]
+        for u in range(3):
+            new_message += '.'
+    return new_message
 
 
 def print_rows():
