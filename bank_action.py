@@ -26,6 +26,7 @@ def get_sum_income():
     with open(csv_file_name, newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
+        next(reader)
         for row in reader:
             #print(f'Debug: Row: {row}')
             if row[1] != '':
@@ -39,6 +40,7 @@ def get_sum_expense():
     with open(csv_file_name, newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
+        next(reader)
         for row in reader:
             #print(f'Debug: Row: {row[2]}')
             if row[2] != '':
@@ -50,6 +52,7 @@ def print_history():
     sum = 0
     with open(csv_file_name, newline='') as csvfile:
         reader = csv.reader(csvfile)
+        next(reader)
         next(reader)
         print()
         for row in reader:
