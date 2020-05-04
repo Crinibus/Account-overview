@@ -144,4 +144,4 @@ if __name__ == '__main__':
             lav_csv_fil()
         main()
     except KeyboardInterrupt:
-        print('\nClosed by user')
+        print('\nLukket af bruger')
