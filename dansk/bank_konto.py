@@ -75,8 +75,7 @@ def ændre_besked(besked):
         ny_besked = ''
         for i in range(7):
             ny_besked += besked[i]
-        for u in range(3):
-            ny_besked += '.'
+        ny_besked += '...'
     return ny_besked
 
 
