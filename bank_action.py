@@ -75,8 +75,7 @@ def change_message(message):
         new_message = ''
         for i in range(7):
             new_message += message[i]
-        for u in range(3):
-            new_message += '.'
+        new_message += '...'
     return new_message
 
 
